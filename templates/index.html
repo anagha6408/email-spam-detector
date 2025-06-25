@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Email Spam Detector</title>
+</head>
+<body>
+<center>
+    <div style="width: 50%; text-align: center; margin-top: 50px; border: 2px solid #ccc; padding: 20px; border-radius: 10px;">
+        <h1>Email Spam Detector</h1>
+        <p>To get started, please copy & paste your email in the below box!!!</p>
+        <form action="/predict" method="post">
+            <div class="form-group">
+                <textarea class="form-control" style="width: 100%;" name="email_content" rows="10" placeholder="Paste your email here..." required></textarea>   
+            </div>
+            <button type="submit" class="btn btn-primary">Click here to Analyze !!</button>
+        </form>
+        {% if result %}
+    <div class="mt-3">
+        <h3>Prediction Result: {{ result }}</h3>
+            {% if "Not Spam" in result %}
+                <img src="{{ url_for('static', filename='success_image.gif') }}" alt="Not Spam Email" width="200">
+            {% else %}
+                <img src="{{ url_for('static', filename='failed_image.gif') }}" alt="Spam Email" width="200">
+            {% endif %}
+        <p><strong>Your Email:</strong></p>
+        <p>{{ email }}</p>
+    </div>
+{% endif %}
+</center>
+</body>
+</html>
